@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import SimpleStorageContract from "../contracts/SimpleStorage.json";
 import getWeb3 from "../utils/getWeb3";
 import ipfs from './ipfs';
+import './Upload.css';
+import 'font-awesome/css/font-awesome.min.css';
+
 
 const abiDecoder = require('abi-decoder');
 // hash array to store hashes of videos
@@ -217,7 +220,13 @@ export class Upload extends Component{
        var par=[];
        
         var hashList = hash.map(function(name){
-                        return <li><img src={`https://ipfs.io/ipfs/${name}`} alt=""/></li>;
+                        return <div className="content-grid">
+                        <li><video width="320" height="240" controls>
+                        <source src={`https://ipfs.io/ipfs/${name}`} type="video/mp4"/>
+                        <source src={`https://ipfs.io/ipfs/${name}`} type="video/ogg"/>
+                        Your browser doesn't support the video tag
+                        </video></li>
+                        </div>
                       })
     
     if (!this.state.web3) {
@@ -225,7 +234,20 @@ export class Upload extends Component{
     }
     
     return (
-      <div className="App">
+      <div >
+        
+        <div class="container black highlightTextOut">
+         <div class="center">
+          <a alt="HOME">HOME</a>
+          <a alt="ARTICLES">ARTICLES</a>
+          <a alt="ABOUT">ABOUT</a>
+          <a alt="CONTACT">CONTACT</a>
+        </div>
+
+           <i id="right" className="fa fa-upload icon" ></i>
+         
+
+        </div>
         <div>The stored value is: {this.state.buffer}</div>
            
                     {/* <img src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} alt=""/> */}
